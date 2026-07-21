@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praktijk Noëmie Jacobs — Klinisch psycholoog</title>
+  <meta name="description" content="Praktijk Noëmie Jacobs — klinisch psycholoog. Een warme, veilige plek voor gesprekstherapie bij angst, stress, burn-out, rouw en meer." />
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="Praktijk Noëmie Jacobs — Klinisch psycholoog" />
+  <meta property="og:description" content="Een warme, veilige plek voor gesprekstherapie." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --sage:        #7c9082;
+      --sage-dark:   #5d7266;
+      --sage-light:  #a9bcae;
+      --cream:       #f6f3ec;
+      --cream-warm:  #efe9dd;
+      --ink:         #2f342f;
+      --ink-soft:    #5b615a;
+      --white:       #fffdf9;
+      --radius:      14px;
+      --shadow:      0 12px 40px rgba(60, 70, 60, 0.10);
+      --shadow-sm:   0 4px 18px rgba(60, 70, 60, 0.08);
+      --maxw:        1080px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; line-height: 1.15; letter-spacing: 0.2px; }
+
+    a { color: var(--sage-dark); text-decoration: none; }
+    a:hover { color: var(--ink); }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    section { padding: 96px 0; }
+
+    .eyebrow {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      letter-spacing: 0.3px;
+      font-size: clamp(2.2rem, 4.5vw, 3.1rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--sage-dark);
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    /* Uitgevulde tekst in de leesblokken */
+    .about-grid p, .prose p, .callout p,
+    .info-block p, .info-block li, .contact-lead { text-align: justify; }
+
+    /* ---------- NAV ---------- */
+    header.nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(246, 243, 236, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(124, 144, 130, 0.16);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .brand { display: flex; flex-direction: column; line-height: 1.12; }
+    .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); }
+    .brand-last { color: var(--sage-dark); }
+    .brand-sub { font-family: 'Inter', sans-serif; font-size: 0.66rem; font-weight: 500; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-soft); margin-top: 5px; }
+    .nav-links { display: flex; gap: 30px; list-style: none; }
+    .nav-links a { font-size: 0.92rem; font-weight: 500; color: var(--ink-soft); }
+    .nav-links a:hover { color: var(--sage-dark); }
+    .nav-toggle { display: none; background: none; border: 0; cursor: pointer; font-size: 1.5rem; color: var(--ink); }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      background: linear-gradient(160deg, var(--cream-warm) 0%, var(--cream) 55%);
+      padding: 110px 0 100px;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
+    .hero h1 { font-size: clamp(2.6rem, 5vw, 4rem); color: var(--ink); margin-bottom: 20px; }
+    .hero .lead { font-size: 1.18rem; color: var(--ink-soft); max-width: 520px; margin-bottom: 32px; }
+    .hero-portrait {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius);
+      background: linear-gradient(150deg, var(--sage-light), var(--sage));
+      box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); text-align: center; padding: 20px;
+      font-size: 0.85rem; letter-spacing: 1px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--sage-dark);
+      color: var(--white);
+      padding: 14px 30px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform 0.15s ease, background 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn:hover { background: var(--ink); color: var(--white); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--sage-dark);
+      border: 1.5px solid var(--sage);
+      box-shadow: none; margin-left: 12px;
+    }
+    .btn-ghost:hover { background: var(--sage); color: var(--white); }
+
+    /* ---------- OVER MIJ ---------- */
+    .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: stretch; }
+    .about-portrait {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      background: linear-gradient(150deg, var(--cream-warm), var(--sage-light));
+    }
+    .about-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+    .about-portrait-mobile { display: none; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    h2 { font-size: clamp(2rem, 3.5vw, 2.7rem); margin-bottom: 20px; color: var(--ink); }
+    .about p { margin-bottom: 16px; color: var(--ink-soft); }
+    .about-credentials { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; clear: both; }
+    .about-credentials .credentials { grid-column: 2; }
+    .credentials { margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(124,144,130,0.2); font-size: 0.92rem; color: var(--ink-soft); }
+    .credentials strong { color: var(--ink); }
+
+    /* ---------- WERKWIJZE / AANBOD ---------- */
+    .aanbod { background: var(--white); }
+    .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .section-head p { color: var(--ink-soft); }
+    .section-lead { max-width: 640px; margin: 0 auto 44px; text-align: center; color: var(--ink-soft); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .card {
+      background: var(--cream);
+      border: 1px solid rgba(124,144,130,0.14);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+    .card .icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      background: var(--sage-light); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; font-size: 1.3rem;
+    }
+    .card h3 { font-size: 1.5rem; margin-bottom: 8px; color: var(--ink); }
+    .card p { font-size: 0.95rem; color: var(--ink-soft); }
+
+    /* Aanbod prose */
+    .prose { max-width: 720px; margin: 0 auto; }
+    .prose p { margin-bottom: 18px; color: var(--ink-soft); font-size: 1.02rem; }
+    .prose p:last-child { margin-bottom: 0; }
+    .callout {
+      max-width: 720px; margin: 40px auto 0;
+      background: var(--cream); border-left: 3px solid var(--sage);
+      border-radius: 12px; padding: 30px 32px;
+    }
+    .callout h3 { font-size: 1.6rem; color: var(--sage-dark); margin-bottom: 14px; }
+    .callout p { color: var(--ink-soft); font-size: 0.98rem; margin-bottom: 14px; }
+    .callout p:last-child { margin-bottom: 0; }
+
+    /* ---------- PRAKTISCH ---------- */
+    .praktisch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px; }
+    .info-block {
+      background: var(--white); border-radius: var(--radius);
+      padding: 30px; box-shadow: var(--shadow-sm);
+    }
+    .info-block h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--sage-dark); }
+    .info-block p, .info-block li { color: var(--ink-soft); font-size: 0.96rem; }
+    .info-block p { margin-bottom: 12px; }
+    .info-block p:last-child { margin-bottom: 0; }
+    .info-block ul { list-style: none; margin-bottom: 14px; }
+    .info-block ul:last-child { margin-bottom: 0; }
+    .info-block li { padding: 5px 0; padding-left: 22px; position: relative; }
+    .info-block li::before { content: "—"; position: absolute; left: 0; color: var(--sage); }
+
+    /* ---------- CONTACT ---------- */
+    .contact { background: var(--sage-dark); color: var(--white); }
+    .contact h2, .contact .eyebrow { color: var(--white); }
+    .contact .eyebrow { opacity: 1; text-align: left; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .contact-details { list-style: none; margin-top: 24px; }
+    .contact-details li { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; font-size: 1rem; }
+    .contact-details .ci { font-size: 1.2rem; opacity: 0.85; width: 24px; flex-shrink: 0; text-align: center; line-height: 1.6; }
+    .contact-details a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+    .contact-details a:hover { color: var(--cream-warm); }
+    .contact-lead { opacity: 0.9; max-width: 420px; }
+
+    form { display: grid; gap: 16px; }
+    .field label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; opacity: 0.9; }
+    .field input, .field textarea {
+      width: 100%; padding: 13px 15px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08); color: var(--white);
+      font-family: inherit; font-size: 0.95rem;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,0.5); }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--cream-warm); background: rgba(255,255,255,0.14); }
+    form .btn { background: var(--cream); color: var(--ink); justify-self: start; }
+    form .btn:hover { background: var(--white); color: var(--ink); }
+    .form-note { font-size: 0.8rem; opacity: 0.7; }
+
+    /* ---------- FOOTER ---------- */
+    footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 40px 0; text-align: center; font-size: 0.88rem; }
+    footer .brand { color: var(--white); font-size: 1.2rem; display: inline-block; margin-bottom: 8px; }
+    footer a { color: rgba(255,255,255,0.7); }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 860px) {
+      section { padding: 70px 0; }
+      .hero-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-portrait { max-width: 340px; }
+      .about-grid { display: block; }
+      .about-portrait { display: none; }
+      .about-portrait-mobile { display: block; float: right; width: 44%; max-width: 165px; height: auto; margin: 4px 0 12px 18px; }
+      .about-credentials { display: block; }
+      .cards, .praktisch-grid { grid-template-columns: 1fr; }
+      .nav-links {
+        display: none; position: absolute; top: 70px; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: var(--cream); padding: 10px 24px 20px;
+        border-bottom: 1px solid rgba(124,144,130,0.18);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { padding: 10px 0; border-bottom: 1px solid rgba(124,144,130,0.12); }
+      .nav-toggle { display: block; }
+      .btn-ghost { margin-left: 0; margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <span class="brand-name">Noëmie&nbsp;<span class="brand-last">Jacobs</span></span>
+        <span class="brand-sub">Klinisch Psycholoog · Psychoanalytisch Therapeut</span>
+      </div>
+      <button class="nav-toggle" aria-label="Menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+      <ul class="nav-links" id="navlinks">
+        <li><a href="#over">Over mij</a></li>
+        <li><a href="#aanbod">Aanbod</a></li>
+        <li><a href="#praktisch">Praktisch</a></li>
+        <li><a href="#dringende-hulp">Dringende hulp</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ============ OVER MIJ ============ -->
+  <section id="over" class="about">
+    <div class="wrap">
+      <p class="eyebrow">Welkom</p>
+      <div class="about-grid">
+      <div class="about-portrait">
+        <img src="noemie.jpg" alt="Noëmie Jacobs, klinisch psycholoog" />
+      </div>
+      <div class="about-text">
+        <img src="noemie.jpg" alt="Noëmie Jacobs, klinisch psycholoog" class="about-portrait-mobile" />
+        <p>Ik ben Noëmie Jacobs, klinisch psycholoog (KULeuven, 2015) en psychoanalytisch psychotherapeut i.o. (KULeuven, 2023 - 2027).</p>
+        <p>(Jong)volwassenen (18+) kunnen bij mij terecht voor individuele psychoanalytische therapie <em>(zie <a href="#aanbod">aanbod</a> voor meer informatie)</em>.</p>
+        <p>Naast mijn zelfstandige activiteit, ben ik sinds 2020 werkzaam als klinisch psycholoog in het volwassenenteam van CGG De Pont Mechelen - Lier - Boom.</p>
+        <p>Doorheen de jaren heb ik ruime ervaring opgebouwd in het werken met uiteenlopende hulpvragen en klachten. Daarbij heb ik een bijzondere affiniteit ontwikkeld voor hechtings- en relationele moeilijkheden.</p>
+        <p>Hulpvragen kunnen heel divers zijn. Je kan bij mij terecht wanneer je het gevoel hebt vast te lopen in terugkerende patronen, wanneer relaties moeilijk verlopen of wanneer ervaringen uit het verleden blijven doorwerken in het heden. Ook vragen rond identiteit, zelfbeeld, zingeving, intimiteit, verlies, eenzaamheid, schuld- of schaamtegevoelens, innerlijke conflicten of moeilijk hanteerbare emoties kunnen aan bod komen. Soms is het moeilijk om onder woorden te brengen wat er precies speelt. Ook dan ben je welkom: samen nemen we de tijd om te onderzoeken wat jou bezighoudt en welke betekenis dit voor jou heeft.</p>
+      </div>
+      </div>
+      <div class="about-credentials">
+        <div class="credentials">
+          Visumnummer: 287802<br />
+          Erkenningsnummer Psychologencommissie: 912116574<br />
+          Lid van VVPT
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WERKWIJZE / AANBOD ============ -->
+  <section id="aanbod" class="aanbod">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Aanbod</p>
+      </div>
+      <div class="prose">
+        <p>Ik bied individuele psychoanalytische therapie aan voor (jong)volwassenen. Daarbij staat een veilige en vertrouwelijke ruimte centraal, waar je op je eigen tempo woorden kunt geven aan wat er binnenin je leeft.</p>
+        <p>Psychoanalytische therapie vertrekt vanuit de gedachte dat psychische klachten niet los staan van je levensverhaal. Samen onderzoeken we hoe ervaringen, relaties en patronen die zich vaak buiten ons bewustzijn afspelen, kunnen doorwerken in het heden en je dagelijks functioneren beïnvloeden.</p>
+        <p>In de gesprekken is er ruimte om vrij te spreken over alles wat zich aandient, zonder dat je alles meteen hoeft te begrijpen of op te lossen. We nemen de tijd om stil te staan bij gedachten, gevoelens, dromen, fantasieën, verlangens en terugkerende ervaringen. Zo ontstaat gaandeweg meer inzicht in jezelf, je relaties en de betekenis van jouw klachten. Dat inzicht kan leiden tot meer vrijheid in hoe je met jezelf en anderen omgaat.</p>
+        <p>Psychoanalytische therapie is een verdiepend proces. Ze richt zich niet alleen op het verminderen van klachten maar vooral op het duurzaam veranderen van de omgang met onze innerlijke wereld en met de buitenwereld. Deze vorm van therapie vraagt dan ook tijd en regelmaat. Wekelijkse sessies bieden de continuïteit die nodig is om terugkerende thema's en patronen te onderzoeken en stap voor stap tot duurzame verandering te komen.</p>
+      </div>
+      <div class="callout">
+        <h3>Een eerste gesprek</h3>
+        <p>Tijdens de eerste gesprekken nemen we de tijd om samen te verkennen wat je hulpvraag is en wat je verwachtingen van therapie zijn. Het zou kunnen dat ik niet de meest aangewezen persoon ben om je verder te helpen. In dat geval bekijken we samen welke vorm van hulp beter aansluit en verwijs ik je, indien gewenst, door.</p>
+        <p>Mogelijks heb je al eerder (psychologische) hulpverlening gehad of word je doorverwezen via een huisarts of andere professional. Als je hier verslagen of een doorverwijsbrief van hebt, is het zinvol om deze mee te nemen naar het eerste gesprek.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRAKTISCH ============ -->
+  <section id="praktisch">
+    <div class="wrap">
+      <p class="eyebrow" style="text-align:center;">Praktische informatie</p>
+      <div class="praktisch-grid">
+        <div class="info-block">
+          <h3>Een afspraak maken</h3>
+          <p>De praktijk is gelegen te Merksplas, met gratis parkeergelegenheid.</p>
+          <p>Gesprekken worden ingepland op donderdag en vrijdag.</p>
+          <p>Je kan je aanmelden voor een kennismakingsgesprek via <a href="mailto:info@praktijknoemiejacobs.be">info@praktijknoemiejacobs.be</a>.</p>
+        </div>
+        <div class="info-block">
+          <h3>Tarief &amp; terugbetaling</h3>
+          <ul>
+            <li>Intakegesprek (45 minuten): € 90</li>
+            <li>Individueel gesprek (45 minuten): € 80</li>
+            <li>Gezamenlijk gesprek (45 minuten): € 100</li>
+            <li>Extern overleg: € 90</li>
+          </ul>
+          <p>De meeste mutualiteiten voorzien een gedeeltelijke terugbetaling van een beperkt aantal sessies. Omdat de voorwaarden per ziekenfonds verschillen, raden we aan om vooraf bij je eigen zorgverzekeraar na te vragen op welke tegemoetkoming je recht hebt.</p>
+          <p>De kosten voor laattijdige annulaties worden niet door het ziekenfonds vergoed.</p>
+        </div>
+        <div class="info-block">
+          <h3>Locatie</h3>
+          <p>De praktijk bevindt zich op:<br />
+          <strong>Werfstraat 2</strong><br />
+          2330 Merksplas</p>
+          <p style="margin-top:8px;">[ Bereikbaarheid: parkeren, openbaar vervoer, toegankelijkheid ]</p>
+        </div>
+        <div class="info-block">
+          <h3>Vertrouwelijk</h3>
+          <p>Alles wat je deelt, blijft tussen ons. Als klinisch psycholoog ben ik gebonden aan het beroepsgeheim en de deontologische code.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DRINGENDE HULP ============ -->
+  <section id="dringende-hulp" style="background: var(--white);">
+    <div class="wrap">
+      <p class="eyebrow" style="text-align:center;">Dringende hulp nodig?</p>
+      <p class="section-lead">Heb je nood aan een gesprek buiten de openingsuren of tijdens de wachttijd, dan kan je terecht bij onderstaande hulp- en ondersteuningsdiensten.</p>
+      <div class="praktisch-grid">
+        <div class="info-block">
+          <h3>Hulpdiensten</h3>
+          <p>Bij acute noodsituaties of levensbedreigende crisissen neem je steeds contact op met de hulpdiensten via het noodnummer <a href="tel:112">112</a>.</p>
+        </div>
+        <div class="info-block">
+          <h3>Huisarts of huisarts van wacht</h3>
+          <p>Voor dringende medische vragen kan je terecht bij je eigen huisarts of bij de huisarts van wacht.</p>
+        </div>
+        <div class="info-block">
+          <h3>Tele-Onthaal (volwassenen)</h3>
+          <p>Via Tele-Onthaal kan je dag en nacht terecht voor een gratis en anoniem gesprek met een vrijwilliger. Bel <a href="tel:106">106</a> of maak gebruik van de chatfunctie via <a href="https://www.tele-onthaal.be" target="_blank" rel="noopener">www.tele-onthaal.be</a>.</p>
+        </div>
+        <div class="info-block">
+          <h3>Awel (kinderen en jongeren)</h3>
+          <p>Awel biedt een luisterend oor voor kinderen en jongeren. Je kan elke weekdag tussen 18.00 en 22.00 uur gratis bellen naar het nummer <a href="tel:102">102</a>. Chatten is ook mogelijk via <a href="https://www.awel.be" target="_blank" rel="noopener">www.awel.be</a>.</p>
+        </div>
+        <div class="info-block">
+          <h3>Zelfmoordlijn 1813</h3>
+          <p>Voor vragen of zorgen rond zelfdoding kan je anoniem en gratis terecht bij de Zelfmoordlijn via <a href="tel:1813">1813</a>. Je kan ook chatten of mailen via <a href="https://www.zelfmoord1813.be" target="_blank" rel="noopener">www.zelfmoord1813.be</a>.</p>
+        </div>
+        <div class="info-block">
+          <h3>Hulplijn Geweld</h3>
+          <p>Voor ondersteuning of advies bij situaties van geweld kan je gratis bellen naar het nummer <a href="tel:1712">1712</a>, elke werkdag tussen 9.00 en 17.00 uur.</p>
+        </div>
+        <div class="info-block">
+          <h3>De Druglijn</h3>
+          <p>Met vragen over alcohol, drugs, medicatie of gokken kan je terecht bij De Druglijn via <a href="tel:078151020">078 15 10 20</a>. (Kostprijs: € 0,05 – € 0,025 per minuut)</p>
+        </div>
+        <div class="info-block">
+          <h3>De Holebifoon</h3>
+          <p>De Holebifoon is een onthaal- en informatielijn voor vragen rond seksuele oriëntatie en genderidentiteit. Bel <a href="tel:080099533">0800 99 533</a> voor een gratis en vertrouwelijk gesprek.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <p class="contact-lead">Laat gerust iets weten. Ik neem zo snel mogelijk contact met je op, in alle discretie.</p>
+        <ul class="contact-details">
+          <li><span class="ci">✉</span> <a href="mailto:info@praktijknoemiejacobs.be">info@praktijknoemiejacobs.be</a></li>
+          <li><span class="ci">⌖</span> <span>Werfstraat 2, 2330 Merksplas</span></li>
+        </ul>
+      </div>
+      <div>
+        <!-- PLACEHOLDER: dit formulier heeft een verzenddienst nodig om te werken.
+             Eenvoudigste optie: maak een gratis account op Formspree (formspree.io),
+             en vervang action="#" hieronder door je eigen Formspree-URL.
+             Zonder verzenddienst blijven telefoon en e-mail hierboven de werkende contactweg. -->
+        <form action="#" method="POST">
+          <div class="field">
+            <label for="naam">Naam</label>
+            <input id="naam" name="naam" type="text" placeholder="Je naam" required />
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="je@email.be" required />
+          </div>
+          <div class="field">
+            <label for="bericht">Bericht</label>
+            <textarea id="bericht" name="bericht" rows="4" placeholder="Waarmee kan ik je helpen?" required></textarea>
+          </div>
+          <button type="submit" class="btn">Verstuur bericht</button>
+          <p class="form-note">Je gegevens worden vertrouwelijk behandeld en enkel gebruikt om je contactvraag te beantwoorden.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap">
+      <div class="brand">Noëmie Jacobs</div>
+      <p>Klinisch Psycholoog · Psychoanalytisch Therapeut · Merksplas · Ondernemingsnummer 1025.713.929</p>
+      <p style="margin-top:10px; opacity:0.6;">© <span id="jaar"></span> Praktijk Noëmie Jacobs — Alle rechten voorbehouden.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Vul automatisch het huidige jaar in de footer
+    document.getElementById('jaar').textContent = new Date().getFullYear();
+
+    // Sluit het mobiele menu na het klikken op een link
+    document.querySelectorAll('#navlinks a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.getElementById('navlinks').classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
