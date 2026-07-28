@@ -207,18 +207,23 @@
     .contact-lead { opacity: 0.9; max-width: 420px; }
 
     form { display: grid; gap: 16px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .field label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; opacity: 0.9; }
     .field input, .field textarea {
       width: 100%; padding: 13px 15px; border-radius: 10px;
       border: 1px solid rgba(255,255,255,0.25);
       background: rgba(255,255,255,0.08); color: var(--white);
       font-family: inherit; font-size: 0.95rem;
+      color-scheme: dark;
     }
     .field input::placeholder, .field textarea::placeholder { color: rgba(255,255,255,0.5); }
     .field input:focus, .field textarea:focus { outline: none; border-color: var(--cream-warm); background: rgba(255,255,255,0.14); }
     form .btn { background: var(--cream); color: var(--ink); justify-self: start; }
     form .btn:hover { background: var(--white); color: var(--ink); }
     .form-note { font-size: 0.8rem; opacity: 0.7; }
+    .form-status { font-size: 0.92rem; font-weight: 500; min-height: 1.4em; }
+    .form-status.ok { color: #d9ead3; }
+    .form-status.fout { color: #f4cccc; }
 
     /* ---------- FOOTER ---------- */
     footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 40px 0; text-align: center; font-size: 0.88rem; }
@@ -245,6 +250,7 @@
       .nav-links li { padding: 10px 0; border-bottom: 1px solid rgba(124,144,130,0.12); }
       .nav-toggle { display: block; }
       .btn-ghost { margin-left: 0; margin-top: 12px; }
+      .field-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -389,24 +395,44 @@
         </ul>
       </div>
       <div>
-        <!-- PLACEHOLDER: dit formulier heeft een verzenddienst nodig om te werken.
-             Eenvoudigste optie: maak een gratis account op Formspree (formspree.io),
-             en vervang action="#" hieronder door je eigen Formspree-URL.
-             Zonder verzenddienst blijven telefoon en e-mail hierboven de werkende contactweg. -->
-        <form action="#" method="POST">
+        <!-- Verzending via FormSubmit (formsubmit.co) naar info@praktijknoemiejacobs.be.
+             Let op: het allereerste bericht triggert een eenmalige activatiemail
+             naar dat adres — klik op de bevestigingslink en daarna werkt alles automatisch. -->
+        <form id="contactform" action="https://formsubmit.co/info@praktijknoemiejacobs.be" method="POST">
+          <!-- Honeypot tegen spam: onzichtbaar veld dat mensen leeg laten -->
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
           <div class="field">
             <label for="naam">Naam</label>
-            <input id="naam" name="naam" type="text" placeholder="Je naam" required />
+            <input id="naam" name="naam" type="text" required />
           </div>
           <div class="field">
             <label for="email">E-mail</label>
-            <input id="email" name="email" type="email" placeholder="je@email.be" required />
+            <input id="email" name="email" type="email" required />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="gsm">Gsm-nummer</label>
+              <input id="gsm" name="gsm" type="tel" required />
+            </div>
+            <div class="field">
+              <label for="geboortedatum">Geboortedatum</label>
+              <input id="geboortedatum" name="geboortedatum" type="date" required />
+            </div>
           </div>
           <div class="field">
-            <label for="bericht">Bericht</label>
-            <textarea id="bericht" name="bericht" rows="4" placeholder="Waarmee kan ik je helpen?" required></textarea>
+            <label for="woonplaats">Woonplaats</label>
+            <input id="woonplaats" name="woonplaats" type="text" required />
           </div>
-          <button type="submit" class="btn">Verstuur bericht</button>
+          <div class="field">
+            <label for="verwijzing">Hoe ben je bij mij terechtgekomen? Indien doorverwezen, door wie?</label>
+            <textarea id="verwijzing" name="verwijzing" rows="2" required></textarea>
+          </div>
+          <div class="field">
+            <label for="bericht">Geef een korte beschrijving van je hulpvraag</label>
+            <textarea id="bericht" name="bericht" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn" id="verstuurknop">Verstuur bericht</button>
+          <p class="form-status" id="formstatus" role="status" aria-live="polite"></p>
           <p class="form-note">Je gegevens worden vertrouwelijk behandeld en enkel gebruikt om je contactvraag te beantwoorden.</p>
         </form>
       </div>
@@ -431,6 +457,47 @@
     document.querySelectorAll('#navlinks a').forEach(function (link) {
       link.addEventListener('click', function () {
         document.getElementById('navlinks').classList.remove('open');
+      });
+    });
+
+    // Contactformulier: verstuur via FormSubmit zonder de pagina te verlaten
+    document.getElementById('contactform').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = this;
+      var knop = document.getElementById('verstuurknop');
+      var status = document.getElementById('formstatus');
+      knop.disabled = true;
+      knop.textContent = 'Versturen…';
+      status.className = 'form-status';
+      status.textContent = '';
+      fetch('https://formsubmit.co/ajax/info@praktijknoemiejacobs.be', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          naam: form.naam.value,
+          email: form.email.value,
+          'gsm-nummer': form.gsm.value,
+          geboortedatum: form.geboortedatum.value.split('-').reverse().join('/'),
+          woonplaats: form.woonplaats.value,
+          'hoe terechtgekomen / doorverwezen door': form.verwijzing.value,
+          hulpvraag: form.bericht.value,
+          _subject: 'Nieuw bericht via praktijknoemiejacobs.be',
+          _template: 'table'
+        })
+      }).then(function (res) {
+        if (!res.ok) throw new Error('mislukt');
+        return res.json();
+      }).then(function () {
+        status.textContent = 'Bedankt voor je bericht! Ik neem zo snel mogelijk contact met je op.';
+        status.className = 'form-status ok';
+        form.reset();
+        knop.disabled = false;
+        knop.textContent = 'Verstuur bericht';
+      }).catch(function () {
+        status.textContent = 'Er ging iets mis bij het versturen. Probeer het later opnieuw of mail rechtstreeks naar info@praktijknoemiejacobs.be.';
+        status.className = 'form-status fout';
+        knop.disabled = false;
+        knop.textContent = 'Verstuur bericht';
       });
     });
   </script>
