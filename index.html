@@ -50,7 +50,7 @@
 
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
 
-    section { padding: 96px 0; }
+    section { padding: 64px 0 96px; }
 
     .eyebrow {
       font-family: 'Cormorant Garamond', Georgia, serif;
@@ -127,23 +127,24 @@
     /* ---------- OVER MIJ ---------- */
     .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; align-items: stretch; }
     .about-portrait {
+      position: relative;
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow-sm);
       background: linear-gradient(150deg, var(--cream-warm), var(--sage-light));
     }
-    .about-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+    .about-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
     .about-portrait-mobile { display: none; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
     h2 { font-size: clamp(2rem, 3.5vw, 2.7rem); margin-bottom: 20px; color: var(--ink); }
     .about p { margin-bottom: 16px; color: var(--ink-soft); }
     .about-credentials { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; clear: both; }
-    .about-credentials .credentials { grid-column: 2; }
+    .about-credentials .credentials { grid-column: 1 / -1; }
     .credentials { margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(124,144,130,0.2); font-size: 0.92rem; color: var(--ink-soft); }
     .credentials strong { color: var(--ink); }
 
     /* ---------- WERKWIJZE / AANBOD ---------- */
     .aanbod { background: var(--white); }
-    .section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+    .section-head { text-align: center; max-width: 640px; margin: 0 auto; }
     .section-head p { color: var(--ink-soft); }
     .section-lead { max-width: 640px; margin: 0 auto 44px; text-align: center; color: var(--ink-soft); }
     .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -178,7 +179,7 @@
     .callout p:last-child { margin-bottom: 0; }
 
     /* ---------- PRAKTISCH ---------- */
-    .praktisch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 40px; }
+    .praktisch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
     .info-block {
       background: var(--white); border-radius: var(--radius);
       padding: 30px; box-shadow: var(--shadow-sm);
@@ -191,6 +192,7 @@
     .info-block ul:last-child { margin-bottom: 0; }
     .info-block li { padding: 5px 0; padding-left: 22px; position: relative; }
     .info-block li::before { content: "—"; position: absolute; left: 0; color: var(--sage); }
+    .info-block.breed { grid-column: 1 / -1; }
 
     /* ---------- CONTACT ---------- */
     .contact { background: var(--sage-dark); color: var(--white); }
@@ -225,12 +227,12 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 860px) {
-      section { padding: 70px 0; }
+      section { padding: 46px 0 70px; }
       .hero-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
       .hero-portrait { max-width: 340px; }
       .about-grid { display: block; }
       .about-portrait { display: none; }
-      .about-portrait-mobile { display: block; float: right; width: 44%; max-width: 165px; height: auto; margin: 4px 0 12px 18px; }
+      .about-portrait-mobile { display: block; width: 100%; max-width: 410px; height: auto; margin: 4px auto 20px; }
       .about-credentials { display: block; }
       .cards, .praktisch-grid { grid-template-columns: 1fr; }
       .nav-links {
@@ -272,10 +274,10 @@
       <p class="eyebrow">Welkom</p>
       <div class="about-grid">
       <div class="about-portrait">
-        <img src="noemie.jpg" alt="Noëmie Jacobs, klinisch psycholoog" />
+        <img src="noemie-vierkant.jpg" alt="Noëmie Jacobs, klinisch psycholoog" />
       </div>
       <div class="about-text">
-        <img src="noemie.jpg" alt="Noëmie Jacobs, klinisch psycholoog" class="about-portrait-mobile" />
+        <img src="noemie-vierkant.jpg" alt="Noëmie Jacobs, klinisch psycholoog" class="about-portrait-mobile" />
         <p>Ik ben Noëmie Jacobs, klinisch psycholoog (KULeuven, 2015) en psychoanalytisch psychotherapeut i.o. (KULeuven, 2023 - 2027).</p>
         <p>(Jong)volwassenen vanaf 18 jaar kunnen bij mij terecht voor individuele psychoanalytische therapie <em>(zie <a href="#aanbod">aanbod</a> voor meer informatie)</em>.</p>
         <p>Naast mijn zelfstandige activiteit, ben ik sinds 2020 werkzaam als klinisch psycholoog in het volwassenenteam van CGG De Pont Mechelen - Lier - Boom.</p>
@@ -334,7 +336,7 @@
           </ul>
           <p>De meeste mutualiteiten voorzien een gedeeltelijke terugbetaling. Informeer vooraf bij je eigen mutualiteit naar de voorwaarden en tegemoetkoming waarop je recht hebt.</p>
         </div>
-        <div class="info-block">
+        <div class="info-block breed">
           <h3>Annulatiebeleid</h3>
           <p>Afspraken dienen minstens 5 werkdagen op voorhand geannuleerd te worden per mail. Op die manier kan de vrijgekomen tijd zo efficiënt mogelijk ingezet worden.</p>
           <p>Bij gemiste afspraken of afspraken die niet tijdig geannuleerd worden, wordt de gereserveerde tijd volledig aangerekend. Deze kosten worden niet door de mutualiteit vergoed.</p>
