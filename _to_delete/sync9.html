@@ -334,27 +334,16 @@
       color: var(--ink-soft);
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 32px;
       flex-wrap: wrap;
     }
 
-    /* Compsy-widget: op natuurlijke grootte renderen en als geheel verkleinen,
-       zodat logo en tekst in verhouding blijven en niets wordt afgesneden */
-    .embed-scale {
-      width: 180px;
-      margin-left: auto;
-      height: 100px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .embed-scale iframe {
+    .credentials iframe {
       width: 400px;
+      max-width: 100%;
       height: 200px;
       border: none;
-      transform: scale(0.5);
-      transform-origin: top left;
     }
 
     .credentials strong {
@@ -827,13 +816,11 @@
         <div class="credentials">
           <div>
             Visumnummer: 287802<br />
-            Erkenning ComPsy: 912116574<br />
+            Erkenningsnummer Psychologencommissie: 912116574<br />
             Lid van VVPT
           </div>
-          <div class="embed-scale">
-            <iframe src="https://www.compsy.be/nl_BE/psychologist/embed/14060"
-              title="Verificatie Psychologencommissie" loading="lazy"></iframe>
-          </div>
+          <iframe src="https://www.compsy.be/nl_BE/psychologist/embed/14060" title="Verificatie Psychologencommissie"
+            loading="lazy"></iframe>
         </div>
       </div>
     </div>
