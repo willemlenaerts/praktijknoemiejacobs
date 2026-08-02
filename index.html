@@ -341,20 +341,22 @@
 
     /* Compsy-widget: op natuurlijke grootte renderen en als geheel verkleinen,
        zodat logo en tekst in verhouding blijven en niets wordt afgesneden */
+    /* Kader ligt exact rond de badge-inhoud (opgemeten: 8px marge, 400x117 groot) */
     .embed-scale {
-      width: 180px;
-      height: 100px;
+      width: 200px;
+      height: 59px;
       overflow: hidden;
       margin-left: auto;
       flex-shrink: 0;
     }
 
     .embed-scale iframe {
-      width: 400px;
+      width: 416px;
       height: 200px;
       border: none;
       transform: scale(0.5);
       transform-origin: top left;
+      margin: -4px 0 0 -4px;
     }
 
     .credentials strong {
