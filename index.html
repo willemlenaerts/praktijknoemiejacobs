@@ -343,9 +343,9 @@
        zodat logo en tekst in verhouding blijven en niets wordt afgesneden */
     .embed-scale {
       width: 180px;
-      margin-left: auto;
       height: 100px;
       overflow: hidden;
+      margin-left: auto;
       flex-shrink: 0;
     }
 
@@ -728,6 +728,17 @@
         display: block;
       }
 
+      /* Erkenningsgegevens + ComPsy-widget onder elkaar, gecentreerd */
+      .credentials {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .embed-scale {
+        margin: 0 auto;
+      }
+
       .cards,
       .praktisch-grid {
         grid-template-columns: 1fr;
@@ -827,7 +838,7 @@
         <div class="credentials">
           <div>
             Visumnummer: 287802<br />
-            Erkenning ComPsy: 912116574<br />
+            Erkenning Psychologencommissie: 912116574<br />
             Lid van VVPT
           </div>
           <div class="embed-scale">
