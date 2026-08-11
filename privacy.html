@@ -151,6 +151,27 @@
       margin-bottom: 12px;
     }
 
+    /* Uitgevulde tekst met gedoseerde woordafbreking (zoals op de hoofdpagina) */
+    main p,
+    main li {
+      text-align: justify;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      hyphenate-limit-chars: 10 5 5;
+      -webkit-hyphenate-limit-before: 5;
+      -webkit-hyphenate-limit-after: 5;
+    }
+
+    @media (max-width: 860px) {
+
+      main p,
+      main li {
+        hyphenate-limit-chars: 7 3 3;
+        -webkit-hyphenate-limit-before: 3;
+        -webkit-hyphenate-limit-after: 3;
+      }
+    }
+
     ul {
       list-style: none;
       margin-bottom: 12px;
