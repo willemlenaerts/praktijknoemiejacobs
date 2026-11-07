@@ -974,10 +974,10 @@
         </ul>
       </div>
       <div>
-        <!-- Verzending via FormSubmit (formsubmit.co) naar info@praktijknoemiejacobs.be.
-             Let op: het allereerste bericht triggert een eenmalige activatiemail
-             naar dat adres — klik op de bevestigingslink en daarna werkt alles automatisch. -->
-        <form id="contactform" action="https://formsubmit.co/info@praktijknoemiejacobs.be" method="POST">
+        <!-- Verzending via Google Apps Script (Google Workspace van de praktijk):
+             elke aanvraag wordt gemaild naar info@praktijknoemiejacobs.be.
+             De web-app-URL staat onderaan in APPS_SCRIPT_URL. -->
+        <form id="contactform" method="POST">
           <!-- Honeypot tegen spam: onzichtbaar veld dat mensen leeg laten -->
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
           <div class="field">
@@ -1041,45 +1041,50 @@
       });
     });
 
-    // Contactformulier: verstuur via FormSubmit zonder de pagina te verlaten
+    // Contactformulier: verstuur naar Google Apps Script zonder de pagina te verlaten
+    var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrZuLFa6Pq7Ajufli44fG72FKVA3apcH2uXr9qyMQRkz0ExFQIfBpn7RqUXSPNBdyu/exec';
+
     document.getElementById('contactform').addEventListener('submit', function (e) {
       e.preventDefault();
       var form = this;
       var knop = document.getElementById('verstuurknop');
       var status = document.getElementById('formstatus');
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       knop.disabled = true;
       knop.textContent = 'Versturen…';
       status.className = 'form-status';
       status.textContent = '';
-      fetch('https://formsubmit.co/ajax/info@praktijknoemiejacobs.be', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          naam: form.naam.value,
-          email: form.email.value,
-          'gsm-nummer': form.gsm.value,
-          geboortedatum: form.geboortedatum.value.split('-').reverse().join('/'),
-          woonplaats: form.woonplaats.value,
-          'hoe terechtgekomen / doorverwezen door': form.verwijzing.value,
-          hulpvraag: form.bericht.value,
-          _subject: 'Nieuw bericht via praktijknoemiejacobs.be',
-          _template: 'table'
-        })
-      }).then(function (res) {
-        if (!res.ok) throw new Error('mislukt');
-        return res.json();
-      }).then(function () {
-        status.textContent = 'Bedankt voor je bericht! Ik neem zo snel mogelijk contact met je op.';
-        status.className = 'form-status ok';
-        form.reset();
-        knop.disabled = false;
-        knop.textContent = 'Verstuur bericht';
-      }).catch(function () {
-        status.textContent = 'Er ging iets mis bij het versturen. Probeer het later opnieuw of mail rechtstreeks naar info@praktijknoemiejacobs.be.';
-        status.className = 'form-status fout';
-        knop.disabled = false;
-        knop.textContent = 'Verstuur bericht';
-      });
+
+      // Als formuliergegevens (x-www-form-urlencoded) versturen: zo is er geen CORS-preflight nodig
+      var data = new URLSearchParams();
+      data.append('naam', form.naam.value);
+      data.append('email', form.email.value);
+      data.append('gsm', form.gsm.value);
+      data.append('geboortedatum', form.geboortedatum.value.split('-').reverse().join('/'));
+      data.append('woonplaats', form.woonplaats.value);
+      data.append('verwijzing', form.verwijzing.value);
+      data.append('bericht', form.bericht.value);
+      data.append('_honey', form._honey.value);
+
+      fetch(APPS_SCRIPT_URL, { method: 'POST', body: data })
+        .then(function (res) {
+          if (!res.ok) throw new Error('mislukt');
+          return res.json();
+        }).then(function (json) {
+          if (!json || !json.ok) throw new Error('mislukt');
+          status.textContent = 'Bedankt voor je bericht! Ik neem zo snel mogelijk contact met je op.';
+          status.className = 'form-status ok';
+          form.reset();
+        }).catch(function () {
+          status.textContent = 'Er ging iets mis bij het versturen. Probeer het later opnieuw of mail rechtstreeks naar info@praktijknoemiejacobs.be.';
+          status.className = 'form-status fout';
+        }).then(function () {
+          knop.disabled = false;
+          knop.textContent = 'Verstuur bericht';
+        });
     });
   </script>
 
